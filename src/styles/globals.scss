@@ -1,27 +1,6 @@
 @use './colors' as *;
 @use './fonts' as *;
-
-// global styles
-.main {
-  max-width: 736px;
-  padding: 40px;
-  background-color: $white;
-  border-radius: 24px;
-}
-
-.pageContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 120px;
-  background-color: $white-coffee;
-}
-
-.title {
-  font-family: YoungSerif, sans-serif;
-  color: $dark-charcoal;
-}
+@use './mixins' as *;
 
 * {
   padding: 0;
@@ -37,10 +16,49 @@
 }
 
 body {
+  min-width: 100dvw;
   line-height: 1.5;
 }
 
-// sections
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 736px;
+  background-color: $white;
+
+  @include media(md) {
+    padding: 40px;
+    border-radius: 24px;
+  }
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  @include media(md) {
+    padding: 120px;
+    background-color: $white-coffee;
+  }
+}
+
+.title {
+  font-family: YoungSerif, sans-serif;
+  color: $dark-charcoal;
+}
+
+.contentContainer {
+  padding: 32px;
+
+  @include media(md) {
+    padding: 0;
+  }
+}
+
 #instructions,
 #ingredients {
   padding-block: 32px;
@@ -54,56 +72,75 @@ body {
   row-gap: 24px;
 }
 
-.sectionTitle {
-  font-family: YoungSerif, sans-serif;
-  color: $nutmeg;
-}
-
-// lists
-.list {
-  line-height: 2;
-  list-style-position: inside;
-
-  > li::marker {
-    padding-right: 16px;
+section {
+  .title {
+    padding-bottom: 16px;
+    font-family: YoungSerif, sans-serif;
     color: $nutmeg;
   }
 }
 
-// cards
+.list {
+  padding-left: 16px;
+  line-height: 2;
+
+  .listitem {
+    box-sizing: border-box;
+    padding-left: 16px;
+  }
+
+  ::marker {
+    color: $nutmeg;
+  }
+}
+
 .card {
-  padding: 28px;
+  padding: 24px;
   background-color: $rose-white;
   border-radius: 12px;
+
+  .title {
+    padding-bottom: 16px;
+    font-size: 1.25rem;
+    color: $nutmeg;
+  }
+
+  @include media(md) {
+    padding: 28px;
+  }
 }
 
-.cardTitle {
-  font-size: 1.25rem;
-  color: $nutmeg;
+table {
+  width: 100%;
 }
 
-// tables
-.table {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 16px;
+tr {
+  display: flex;
+  border-bottom: 1px solid $white-coffee;
+
+  &:last-child {
+    border: none;
+  }
 }
 
-.tableRow {
-  &:nth-child(even) {
+td {
+  flex: 1;
+  padding: 0.75rem 0;
+  padding-left: 1.5rem;
+
+  &:last-child {
     font-weight: 600;
     color: $nutmeg;
   }
 }
 
-.listItemHeading {
-  font-weight: 600;
-}
-
-// images
-.recipeImage {
-  max-width: 656px;
+.heroImage {
+  width: 100%;
   max-height: 300px;
   margin-bottom: 24px;
-  border-radius: 12px;
+
+  @include media(md) {
+    max-width: 656px;
+    border-radius: 12px;
+  }
 }
