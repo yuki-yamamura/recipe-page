@@ -7,7 +7,9 @@ if (process.env.NODE_ENV === 'development' && typeof window === 'undefined') {
 }
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <Component {...pageProps} />
+  <div className="pageContainer">
+    <Component {...pageProps} />
+  </div>
 );
 
 export default App;
